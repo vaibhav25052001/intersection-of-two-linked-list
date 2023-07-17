@@ -1,0 +1,38 @@
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        int count=0,count1=0;
+        ListNode *temp=headA;
+        ListNode *temp1=headB;
+        while(temp){
+            count++;
+            temp=temp->next;
+        }
+        while(temp1){
+            count1++;
+            temp1=temp1->next;
+        }
+
+        if(count<count1){        //to equal the length of both linked list
+            while(count<count1){
+                headB=headB->next;
+                count1--;
+            }
+        }
+        if(count>count1){
+            while(count>count1){
+                headA=headA->next;
+                count--;
+            }
+        }
+
+        while(headA && headB){
+            if(headA==headB)
+            return headA;
+
+            headA=headA->next;
+            headB=headB->next;
+        }
+        return NULL;
+    }
+};
